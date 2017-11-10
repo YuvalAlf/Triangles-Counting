@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>0498f8be-70dd-4179-aa73-5d8a0ee6a61f</ProjectGuid>
+    <ProjectGuid>4f7c1397-dadf-4500-a42d-b0e588172541</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>PersistentTriangleCounting</RootNamespace>
     <AssemblyName>PersistentTriangleCounting</AssemblyName>

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3C3F3CBC-5C7A-43A2-82F4-5F0EE18427C6}</ProjectGuid>
+    <ProjectGuid>{672A19CD-E1E4-4F83-8D77-9EA7557BD749}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>EphemeralTriangleCounting</RootNamespace>
     <AssemblyName>EphemeralTriangleCounting</AssemblyName>
