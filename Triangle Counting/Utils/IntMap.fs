@@ -10,6 +10,7 @@ type IntMap<'value>(tree : RBTree<int, 'value>) =
     member x.EnumerateFields() = tree.EnumerateFields()
     member x.TryFind key = tree.TryFind(IntMap<'value>.Comparer, key)
     member x.ContainsKey key = tree.ContainsKey key
+    member x.MapValues f = IntMap<'value>(tree.MapValues(f))
     member x.Count = tree.Count
     static member OfSortedArray array = IntMap<'value>(RBTree<int, 'value>.CreateOfSortedArray (IntMap<'value>.Comparer, array))
     static member MergeArray (array1 : (int * 'value) array) (array2 : (int * 'value) array) =

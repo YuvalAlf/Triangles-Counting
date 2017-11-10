@@ -43,7 +43,7 @@ type PersistentMatrix(cols : IntMap<IntMap<value>>) =
         sMatrix.Values
         |> Array.fold(fun (mat : PersistentMatrix) (row, col, value) -> mat.AddValue(row, col, value)) this
 
-    // O(log n + max{values in a column})
+    // O(log n + max{#_of_values in a column})
     member this.Add(pMatrix : PersistentMatrix) =
         let mutable resCols = cols
         for col, rows in pMatrix.Cols.EnumerateFields() do
@@ -57,6 +57,23 @@ type PersistentMatrix(cols : IntMap<IntMap<value>>) =
     // O(1)
     static member Empty =
         PersistentMatrix(IntMap.Empty)
+
+    // O(log n)
+    member this.MulTrace(s : SparseMatrix) =
+        let mutable trace = 0
+        for (row, col, value) in s.Values do
+            trace <- trace + (this.GetValue(col, row) * value)
+        trace
+
+    // O(log n + max{#_of_values in a column})
+    member this.MulRight(s : SparseMatrix) =
+        let mulOparation (m : PersistentMatrix) (row, col, value) : PersistentMatrix =
+            let column = this.GetCol(row).MapValues(fun v -> v * value)
+            let columnAsMatrix = PersistentMatrix(IntMap.Empty.AddOrUpdate(col, column))
+            m.Add(columnAsMatrix)
+            
+        s.Values
+        |> Array.fold mulOparation PersistentMatrix.Empty
 
     
 

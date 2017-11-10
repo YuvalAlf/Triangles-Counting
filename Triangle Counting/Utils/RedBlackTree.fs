@@ -163,6 +163,10 @@ module RedBlackTree =
         | Node(_, l, _, v, r) -> iterKeys f l ; f v ; iterKeys f r
         | _ -> ()
 
+    let rec mapValues f = function
+        | Node(c, l, k, v, r) -> Node(c, mapValues f l, k, f v, mapValues f r)
+        | _ as t -> t
+
     let inverseColor = function
         | Red   -> Black
         | Black -> Red
@@ -202,7 +206,8 @@ type RBTree<'key, 'value>(comparer : IComparer<'key>, tree : Tree<'key, 'value>,
         match RedBlackTree.delete comparer key tree with
         | Removed, newTree -> new RBTree<'key, 'value>(comparer, newTree, count-1)
         | DidntRemove, newTree -> new RBTree<'key, 'value>(comparer, newTree, count)
-
+    
+    member s.MapValues f = RBTree<'key, 'value>(comparer, RedBlackTree.mapValues f tree, count)
     member s.Count = count
     member s.ContainsKey(key) = RedBlackTree.exist comparer key tree
     member s.TryFind(comparer, key) = RedBlackTree.tryFind comparer key tree
