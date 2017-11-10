@@ -4,6 +4,9 @@ open System.Collections.Generic
 
 type color = Red | Black | BB | NB
 
+type RemoveOperation = Removed | DidntRemove
+type AddOperation = Added | Updated
+
 [<NoEquality; NoComparison>]
 type Tree<'key, 'value> = 
     | Empty // black leaf
@@ -100,16 +103,16 @@ module RedBlackTree =
             else               tryFind comparer key r 
         | _ as s -> failwith ("cant lookup " + (toString s))
 
-    let addOrUpdate (comparer: IComparer<'key>) (key : 'key) (value : 'value) (tree : Tree<'key, 'value>) : Tree<'key, 'value> =
+    let addOrUpdate (comparer: IComparer<'key>) (key : 'key) (value : 'value) (tree : Tree<'key, 'value>) =
         let rec ins = function
-            | Empty -> Node(Red, Empty, key, value, Empty)
+            | Empty -> (Added, Node(Red, Empty, key, value, Empty))
             | Node(color, a, y, yv, b) as s ->
                 let comp = comparer.Compare(key, y)
-                if comp < 0 then balance (color, (ins a), y, yv, b)
-                elif comp > 0 then balance (color, a, y, yv, (ins b))
-                else Node(color, a, key, value, b)
+                if comp < 0 then let op, lt = ins a in (op, balance (color, lt, y, yv, b))
+                elif comp > 0 then let op, rt = ins b in (op, balance (color, a, y, yv, rt))
+                else (Updated, Node(color, a, key, value, b))
             | _ as s -> failwith ("cant insert " + (toString key))
-        in blacken' (ins tree)
+        in let (op, resTree) = ins tree in (op, blacken' resTree)
 
     let rec max = function
         | Empty -> failwith "no largest element"
@@ -132,16 +135,16 @@ module RedBlackTree =
         | Node(color, l, k, v, r) -> let maxKey, maxVal = max l in bubble color (removeMax l) maxKey maxVal r
         | _ as s -> failwith ("cant remove case" + (toString s))
 
-    let delete (comparer: IComparer<'key>) (k : 'key) (tree : Tree<'key, 'value>) : Tree<'key, 'value> = 
+    let delete (comparer: IComparer<'key>) (k : 'key) (tree : Tree<'key, 'value>) = 
         let rec del = function
-            | Empty -> Empty
+            | Empty -> (DidntRemove, Empty)
             | Node(c, a, y, yz, b) as s ->
                 let comp = comparer.Compare(k, y)
-                if comp < 0 then bubble c (del a) y yz b
-                elif comp > 0 then bubble c a y yz (del b)
-                else remove s
+                if comp < 0 then let op, lt = del a in (op, bubble c lt y yz b)
+                elif comp > 0 then let op, rt = del b in (op, bubble c a y yz rt)
+                else (Removed, remove s)
             | _ as s -> failwith ("cant delete " + (toString k))
-        in blacken(del tree)
+        in let op, resTree = del tree in (op, blacken(resTree))
 
     let rec count = function
         | Node(_, l, _, _, r) -> 1 + count l + count r
@@ -186,14 +189,21 @@ module RedBlackTree =
         }
 
 [<Sealed>]
-type RBTree<'key, 'value>(comparer : IComparer<'key>, tree : Tree<'key, 'value>) =
-    static member Empty(comparer) : RBTree<'key, 'value> = new RBTree<'key, 'value>(comparer , Empty)
+type RBTree<'key, 'value>(comparer : IComparer<'key>, tree : Tree<'key, 'value>, count) =
+    static member Empty(comparer) : RBTree<'key, 'value> = new RBTree<'key, 'value>(comparer , Empty, 0)
     static member CreateOfSortedArray (comparer, array : ('key * 'value) array) = 
-         new RBTree<'key, 'value>(comparer , RedBlackTree.createTreeOfSortedArray array)
+         new RBTree<'key, 'value>(comparer , RedBlackTree.createTreeOfSortedArray array, array.Length)
 
-    member s.AddOrUpdate(key, value) : RBTree<'key, 'value> = new RBTree<'key, 'value>(comparer, RedBlackTree.addOrUpdate comparer key value tree)
-    member s.Remove key : RBTree<'key, 'value> = new RBTree<'key, 'value>(comparer, RedBlackTree.delete comparer key tree)
-    member s.Count() = RedBlackTree.count tree
+    member s.AddOrUpdate(key, value) : RBTree<'key, 'value> = 
+        match RedBlackTree.addOrUpdate comparer key value tree with
+        | Updated, newTree -> new RBTree<'key, 'value>(comparer, newTree, count)
+        | Added, newTree -> new RBTree<'key, 'value>(comparer, newTree, count+1)
+    member s.Remove key : RBTree<'key, 'value> = 
+        match RedBlackTree.delete comparer key tree with
+        | Removed, newTree -> new RBTree<'key, 'value>(comparer, newTree, count-1)
+        | DidntRemove, newTree -> new RBTree<'key, 'value>(comparer, newTree, count)
+
+    member s.Count = count
     member s.ContainsKey(key) = RedBlackTree.exist comparer key tree
     member s.TryFind(comparer, key) = RedBlackTree.tryFind comparer key tree
     member s.EnumerateFields() = RedBlackTree.enumerateFields tree

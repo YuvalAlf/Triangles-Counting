@@ -25,7 +25,7 @@ namespace UnitTests
         public void CountTest()
         {
             var map = IntMap<string>.Empty.AddOrUpdate(1, "asd").AddOrUpdate(1, "bgf").AddOrUpdate(3, "asd");
-            Assert.AreEqual(2, map.Count());
+            Assert.AreEqual(2, map.Count);
         }
         [TestMethod]
         public void UpdateTest()
@@ -38,7 +38,7 @@ namespace UnitTests
         {
             var map = IntMap<double>.Empty.AddOrUpdate(1, 2).AddOrUpdate(2, 4).AddOrUpdate(3, 0);
             map = map.Remove(1).Remove(3).Remove(4).Remove(2);
-            Assert.AreEqual(0, map.Count());
+            Assert.AreEqual(0, map.Count);
         }
         [TestMethod]
         public void EnumerationTest()
@@ -55,7 +55,7 @@ namespace UnitTests
         {
             var array = new [] {Tuple.Create(1, 3), Tuple.Create(2, 4), Tuple.Create(5, 8) , Tuple.Create(7, 9) };
             var map = IntMap<int>.OfSortedArray(array);
-            Assert.AreEqual(4, map.Count());
+            Assert.AreEqual(4, map.Count);
             map = map.AddOrUpdate(3, 5).AddOrUpdate(9, 8).AddOrUpdate(10, 11).AddOrUpdate(15, 18);
             Assert.IsTrue(map.ContainsKey(9));
             Assert.IsTrue(map.ContainsKey(2));
