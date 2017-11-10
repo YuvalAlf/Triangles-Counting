@@ -107,7 +107,7 @@ module RedBlackTree =
                 let comp = comparer.Compare(key, y)
                 if comp < 0 then balance (color, (ins a), y, yv, b)
                 elif comp > 0 then balance (color, a, y, yv, (ins b))
-                else s
+                else Node(color, a, key, value, b)
             | _ as s -> failwith ("cant insert " + (toString key))
         in blacken' (ins tree)
 
@@ -172,14 +172,14 @@ module RedBlackTree =
             else
                 let middle = (endIndex + startIndex) / 2
                 let leftTree = create (startIndex) (middle - 1) (inverseColor color)
-                let rightTree = create (middle + 1) (endIndex + 1) (inverseColor color)
+                let rightTree = create (middle + 1) (endIndex) (inverseColor color)
                 Tree.Node(color, leftTree, fst sortedArray.[middle], snd sortedArray.[middle], rightTree)
         create (0) (sortedArray.Length - 1) (Black)
 
     let rec enumerateFields tree = seq {
             match tree with
             | Node(_, l, k, v, r) ->
-                yield k
+                yield (k, v)
                 yield! enumerateFields l
                 yield! enumerateFields r
             | _ -> ignore()
@@ -193,7 +193,7 @@ type RBTree<'key, 'value>(comparer : IComparer<'key>, tree : Tree<'key, 'value>)
 
     member s.AddOrUpdate(key, value) : RBTree<'key, 'value> = new RBTree<'key, 'value>(comparer, RedBlackTree.addOrUpdate comparer key value tree)
     member s.Remove key : RBTree<'key, 'value> = new RBTree<'key, 'value>(comparer, RedBlackTree.delete comparer key tree)
-    member s.Count = RedBlackTree.count tree
+    member s.Count() = RedBlackTree.count tree
     member s.ContainsKey(key) = RedBlackTree.exist comparer key tree
-    member s.TryFind(key) = RedBlackTree.tryFind key tree
-    member s.EnumerateFields = RedBlackTree.enumerateFields tree
+    member s.TryFind(comparer, key) = RedBlackTree.tryFind comparer key tree
+    member s.EnumerateFields() = RedBlackTree.enumerateFields tree

@@ -22,6 +22,14 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LinearAlgebra", "LinearAlge
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Utils", "Utils\Utils.fsproj", "{FA3DACB7-5D1B-477A-9E40-7E7F761A334A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{79E65286-9362-4415-B0DB-B81E09666911}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CEE37B23-243D-49C5-AB73-BB68F7E33729} = {CEE37B23-243D-49C5-AB73-BB68F7E33729}
+		{4F7C1397-DADF-4500-A42D-B0E588172541} = {4F7C1397-DADF-4500-A42D-B0E588172541}
+		{FA3DACB7-5D1B-477A-9E40-7E7F761A334A} = {FA3DACB7-5D1B-477A-9E40-7E7F761A334A}
+		{672A19CD-E1E4-4F83-8D77-9EA7557BD749} = {672A19CD-E1E4-4F83-8D77-9EA7557BD749}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +52,10 @@ Global
 		{FA3DACB7-5D1B-477A-9E40-7E7F761A334A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA3DACB7-5D1B-477A-9E40-7E7F761A334A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA3DACB7-5D1B-477A-9E40-7E7F761A334A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E65286-9362-4415-B0DB-B81E09666911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E65286-9362-4415-B0DB-B81E09666911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E65286-9362-4415-B0DB-B81E09666911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E65286-9362-4415-B0DB-B81E09666911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
