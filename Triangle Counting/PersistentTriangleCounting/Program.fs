@@ -13,15 +13,24 @@ module Program =
                     let nodes = line.Split('\t')
                     yield (Int32.Parse nodes.[1], Int32.Parse nodes.[0])
         }
+
+    let createGraph n m dMax (rnd : Random) =
+        ()
+
+    let benchmark alg =
+        let starting = DateTime.Now
+        let res = alg()
+        let ending = DateTime.Now
+        (res, ending - starting)
         
-    let graph1 = @"C:\Users\Yuval\Downloads\com-lj.ungraph.txt\com-lj.ungraph.txt"
+    //let graph1 = @"C:\Users\Yuval\Downloads\com-lj.ungraph.txt\com-lj.ungraph.txt"
     let graph2 = @"C:\Users\Yuval\Downloads\wiki-Vote.txt\Wiki-Vote.txt"
     let graph3 = @"C:\Users\Yuval\Downloads\email-Enron.txt\Email-Enron.txt"
     let graph4 = @"C:\Users\Yuval\Downloads\ca-AstroPh.txt\CA-AstroPh.txt"
 
     [<EntryPoint>]
     let main argv = 
-        for graphPath in [graph2; graph3; graph4; graph1] do
+        for graphPath in [graph2; graph3; graph4] do
             let graph = parseGraph graphPath
             let mutable triangleCounter = PersistentCounter.Create()
             let mutable numOfEdges = 0
