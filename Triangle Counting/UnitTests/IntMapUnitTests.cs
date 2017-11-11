@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Utils;
 
 namespace UnitTests
-{
+{/*
     [TestClass]
     public class IntMapUnitTests
     {
@@ -62,5 +62,5 @@ namespace UnitTests
             Assert.IsTrue(map.ContainsKey(15));
             Assert.IsTrue(map.ContainsKey(7));
         }
-    }
+    }*/
 }

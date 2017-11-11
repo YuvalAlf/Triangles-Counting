@@ -42,11 +42,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EphemeralMatrix.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LinearAlgebra\LinearAlgebra.fsproj">
+      <Project>{cee37b23-243d-49c5-ab73-bb68f7e33729}</Project>
+      <Name>LinearAlgebra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.fsproj">
+      <Project>{fa3dacb7-5d1b-477a-9e40-7e7f761a334a}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

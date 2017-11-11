@@ -2,12 +2,15 @@
 
 open Utils
 
+type 'value IntMap = Map<int, 'value>
+
 [<Sealed>]
 type PersistentMatrix(cols : IntMap<IntMap<value>>) =
     inherit AbstractMatrix()
 
-    member private this.GetCol col = cols.TryFind(col).OrElse(IntMap.Empty)
-    member private this.Cols = cols
+    member this.Cols = cols
+    member this.GetCol(col) = cols.TryFind(col).OrElse(Map.empty)
+    
 
     // O(log n)
     override this.GetValue(row, col) =
@@ -19,23 +22,28 @@ type PersistentMatrix(cols : IntMap<IntMap<value>>) =
         if newCol.Count = 0 then
             PersistentMatrix(cols.Remove(col))
         else
-            PersistentMatrix(cols.AddOrUpdate(col, newCol))
+            PersistentMatrix(cols.Add(col, newCol))
 
     // O(log n)
     member this.SetValue(row, col, value) =
         if value = 0 then
             this.ZeroValue(row, col)
         else
-            let newCols = cols.AddOrUpdate(col, this.GetCol(col).AddOrUpdate(row, value))
+            let newCols = cols.Add(col, this.GetCol(col).Add(row, value))
             PersistentMatrix(newCols)
             
     // O(log n)
     member this.AddValue(row, col, valueToAdd) =
         this.SetValue(row, col, this.GetValue(row, col) + valueToAdd)
 
+    // O(1)
+    static member Empty =
+        PersistentMatrix(Map.empty)
+(*        
     // O(n) could be made O(1)
     member this.Trace() =
-        cols.EnumerateFields()
+        cols
+        |> Map.toSeq
         |> Seq.sumBy (fun (col, _) -> this.GetValue(col, col))
 
     // O(log n)
@@ -54,10 +62,6 @@ type PersistentMatrix(cols : IntMap<IntMap<value>>) =
 
         PersistentMatrix(resCols)
 
-    // O(1)
-    static member Empty =
-        PersistentMatrix(IntMap.Empty)
-
     // O(log n)
     member this.MulTrace(s : SparseMatrix) =
         let mutable trace = 0
@@ -75,5 +79,5 @@ type PersistentMatrix(cols : IntMap<IntMap<value>>) =
         s.Values
         |> Array.fold mulOparation PersistentMatrix.Empty
 
-    
+    *)
 
