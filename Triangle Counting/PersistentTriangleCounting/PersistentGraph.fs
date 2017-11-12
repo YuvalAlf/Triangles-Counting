@@ -1,6 +1,6 @@
 ﻿namespace PersistentTriangleCounting
 
-open Utils
+open FSharpUtils
 
 type node = int
 

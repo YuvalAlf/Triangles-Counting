@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>4f7c1397-dadf-4500-a42d-b0e588172541</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>PersistentTriangleCounting</RootNamespace>
     <AssemblyName>PersistentTriangleCounting</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -55,11 +55,10 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <None Include="App.config" />
-    <Content Include="packages.config" />
     <Compile Include="PersistentGraph.fs" />
     <Compile Include="PersistentCounter.fs" />
-    <Compile Include="Program.fs" />
+    <None Include="App.config" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -76,14 +75,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LinearAlgebra\LinearAlgebra.fsproj">
-      <Name>LinearAlgebra</Name>
-      <Project>{cee37b23-243d-49c5-ab73-bb68f7e33729}</Project>
+    <ProjectReference Include="..\CSharpUtils\CSharpUtils.csproj">
+      <Name>CSharpUtils</Name>
+      <Project>{95bd01aa-b062-42bb-9689-2d33eb8c6281}</Project>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Utils\Utils.fsproj">
-      <Name>Utils</Name>
-      <Project>{fa3dacb7-5d1b-477a-9e40-7e7f761a334a}</Project>
+    <ProjectReference Include="..\FSharpUtils\FSharpUtils.fsproj">
+      <Name>FSharpUtils</Name>
+      <Project>{12201e54-c95d-47a5-988e-539f6c0ff28b}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TriangleCountingProblem\TriangleCountingProblem.csproj">
+      <Name>TriangleCountingProblem</Name>
+      <Project>{5b351201-47bb-4ed4-a8e4-f0d0e8033fb0}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

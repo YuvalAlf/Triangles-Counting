@@ -1,4 +1,4 @@
-﻿namespace LinearAlgebra.AssemblyInfo
+﻿namespace FSharpUtils.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices
@@ -7,11 +7,11 @@ open System.Runtime.InteropServices
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[<assembly: AssemblyTitle("LinearAlgebra")>]
+[<assembly: AssemblyTitle("FSharpUtils")>]
 [<assembly: AssemblyDescription("")>]
 [<assembly: AssemblyConfiguration("")>]
 [<assembly: AssemblyCompany("")>]
-[<assembly: AssemblyProduct("LinearAlgebra")>]
+[<assembly: AssemblyProduct("FSharpUtils")>]
 [<assembly: AssemblyCopyright("Copyright ©  2017")>]
 [<assembly: AssemblyTrademark("")>]
 [<assembly: AssemblyCulture("")>]
@@ -22,7 +22,7 @@ open System.Runtime.InteropServices
 [<assembly: ComVisible(false)>]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[<assembly: Guid("cee37b23-243d-49c5-ab73-bb68f7e33729")>]
+[<assembly: Guid("12201e54-c95d-47a5-988e-539f6c0ff28b")>]
 
 // Version information for an assembly consists of the following four values:
 // 

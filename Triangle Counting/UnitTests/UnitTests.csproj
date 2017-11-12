@@ -49,7 +49,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntMapUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,17 +59,9 @@
       <Project>{672a19cd-e1e4-4f83-8d77-9ea7557bd749}</Project>
       <Name>EphemeralTriangleCounting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LinearAlgebra\LinearAlgebra.fsproj">
-      <Project>{cee37b23-243d-49c5-ab73-bb68f7e33729}</Project>
-      <Name>LinearAlgebra</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PersistentTriangleCounting\PersistentTriangleCounting.fsproj">
       <Project>{4f7c1397-dadf-4500-a42d-b0e588172541}</Project>
       <Name>PersistentTriangleCounting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utils\Utils.fsproj">
-      <Project>{fa3dacb7-5d1b-477a-9e40-7e7f761a334a}</Project>
-      <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

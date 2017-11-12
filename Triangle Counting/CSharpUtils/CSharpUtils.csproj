@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{672A19CD-E1E4-4F83-8D77-9EA7557BD749}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>EphemeralTriangleCounting</RootNamespace>
-    <AssemblyName>EphemeralTriangleCounting</AssemblyName>
+    <ProjectGuid>{95BD01AA-B062-42BB-9689-2D33EB8C6281}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CSharpUtils</RootNamespace>
+    <AssemblyName>CSharpUtils</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,26 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EdgeIteratorTirangleCounting.cs" />
-    <Compile Include="EphemeralGraph.cs" />
-    <Compile Include="EphemeralMatrix.cs" />
-    <Compile Include="IncrementalTriangleCounting.cs" />
-    <Compile Include="NodeIteratorTriangleCounting.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Box.cs" />
+    <Compile Include="TimeSpanExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CSharpUtils\CSharpUtils.csproj">
-      <Project>{95BD01AA-B062-42BB-9689-2D33EB8C6281}</Project>
-      <Name>CSharpUtils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TriangleCountingProblem\TriangleCountingProblem.csproj">
-      <Project>{5B351201-47BB-4ED4-A8E4-F0D0E8033FB0}</Project>
-      <Name>TriangleCountingProblem</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

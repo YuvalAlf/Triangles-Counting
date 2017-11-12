@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LinearAlgebra;
 
 namespace EphemeralTriangleCounting
 {
@@ -117,20 +116,6 @@ namespace EphemeralTriangleCounting
                     otherCell = otherCell.Next;
                 }
             }
-        }
-
-        // O(d_max)
-        public int MulTrace(SparseMatrix s)
-        {
-            int trace = 0;
-            foreach (var tup in s.Values)
-            {
-                var row = tup.Item1;
-                var col = tup.Item2;
-                var value = tup.Item3;
-                trace += this.GetValue(col, row) * value;
-            }
-            return trace;
         }
 
         public struct Cell
