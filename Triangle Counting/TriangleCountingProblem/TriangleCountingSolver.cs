@@ -6,15 +6,17 @@ namespace TriangleCountingProblem
 {
     public abstract class TriangleCountingSolver
     {
-        public abstract IEnumerable<TimeSpan> NumberOfTriangles(IEnumerable<Tuple<int, int>> nodes, Box<int> numOfTriangles);
+        public abstract IEnumerable<TimeSpan> NumberOfTriangles(IEnumerable<Tuple<int, int>> edges, Box<int> numOfTriangles);
 
-        public BenchmarkResults<int> Benchmark(IEnumerable<Tuple<int, int>> nodes)
+        public abstract string SolverName { get; }
+
+        public BenchmarkResults<int> Benchmark(IEnumerable<Tuple<int, int>> edges)
         {
             TimeSpan overallTime = TimeSpan.Zero;
             TimeSpan overallSquaredTime = TimeSpan.Zero;
             int numOfOperations = 0;
             Box<int> numOfTriangles = new Box<int>(0);
-            foreach (var opTime in NumberOfTriangles(nodes, numOfTriangles))
+            foreach (var opTime in NumberOfTriangles(edges, numOfTriangles))
             {
                 numOfOperations += 1;
                 overallTime += opTime;

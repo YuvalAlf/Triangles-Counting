@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CSharpUtils;
 
 namespace EphemeralTriangleCounting
 {
     public sealed class EphemeralGraph
     {
         public Dictionary<int, HashSet<int>> Nodes { get; }
-        public List<Tuple<int, int>> Edges { get; }
+        public HashSet<Tuple<int, int>> Edges { get; }
 
-        public EphemeralGraph(Dictionary<int, HashSet<int>> nodes, List<Tuple<int, int>> edges)
+        public EphemeralGraph(Dictionary<int, HashSet<int>> nodes, HashSet<Tuple<int, int>> edges)
         {
             Nodes = nodes;
             Edges = edges;
         }
 
-        public static EphemeralGraph Empty => new EphemeralGraph(new Dictionary<int, HashSet<int>>(), new List<Tuple<int, int>>());
+        public static EphemeralGraph Empty => new EphemeralGraph(new Dictionary<int, HashSet<int>>(), new HashSet<Tuple<int, int>>());
 
 
 
@@ -28,6 +29,8 @@ namespace EphemeralTriangleCounting
             if(!Nodes.ContainsKey(node1))
                 Nodes.Add(node1, new HashSet<int>());
             Nodes[node1].Add(node2);
+            if (!Edges.Contains(edge.Inverse()))
+                Edges.Add(edge);
         }
 
 
@@ -55,11 +58,9 @@ namespace EphemeralTriangleCounting
             int numOfTriangles = 0;
             foreach (var node in Nodes.Keys)
                 foreach (var neighbor1 in Nodes[node])
-                foreach (var neighbor2 in Nodes[neighbor1])
-                {
-                    if (Nodes[neighbor2].Contains(node))
-                        numOfTriangles++;
-                }
+                    foreach (var neighbor2 in Nodes[neighbor1])
+                        if (Nodes[neighbor2].Contains(node))
+                            numOfTriangles++;
             return numOfTriangles / 6;
         }
     }

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{672A19CD-E1E4-4F83-8D77-9EA7557BD749}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>EphemeralTriangleCounting</RootNamespace>
-    <AssemblyName>EphemeralTriangleCounting</AssemblyName>
+    <ProjectGuid>{B54FF765-66E8-4974-940C-A3E6FF81A3DF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Benchmark</RootNamespace>
+    <AssemblyName>Benchmark</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,9 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,10 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EdgeIteratorTirangleCounting.cs" />
-    <Compile Include="EphemeralGraph.cs" />
-    <Compile Include="IncrementalTriangleCounting.cs" />
-    <Compile Include="NodeIteratorTriangleCounting.cs" />
+    <Compile Include="GraphProperties.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +53,14 @@
     <ProjectReference Include="..\CSharpUtils\CSharpUtils.csproj">
       <Project>{95BD01AA-B062-42BB-9689-2D33EB8C6281}</Project>
       <Name>CSharpUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EphemeralTriangleCounting\EphemeralTriangleCounting.csproj">
+      <Project>{672A19CD-E1E4-4F83-8D77-9EA7557BD749}</Project>
+      <Name>EphemeralTriangleCounting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PersistentTriangleCounting\PersistentTriangleCounting.fsproj">
+      <Project>{4F7C1397-DADF-4500-A42D-B0E588172541}</Project>
+      <Name>PersistentTriangleCounting</Name>
     </ProjectReference>
     <ProjectReference Include="..\TriangleCountingProblem\TriangleCountingProblem.csproj">
       <Project>{5B351201-47BB-4ED4-A8E4-F0D0E8033FB0}</Project>

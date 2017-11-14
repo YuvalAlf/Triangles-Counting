@@ -17,7 +17,7 @@ type PersistentCounter(graph : PersistentGraph, numOfTriangles : int) =
             this
         else
             let minAdjacentNode = [node1; node2] |> List.minBy (fun node -> graph.GetNode(node).Count)
-            let otherNode = if minAdjacentNode = node1 then node1 else node2
+            let otherNode = if minAdjacentNode = node1 then node2 else node1
             let addedTriangles =
                 graph.GetNode(minAdjacentNode)
                 |> Set.toSeq
@@ -47,8 +47,11 @@ type PersistentCounter(graph : PersistentGraph, numOfTriangles : int) =
             for edge in edges do
                 let starting = DateTime.Now
                 graph <- graph.AddEdge edge
+           //     graph <- graph.AddEdge 
                 let ending = DateTime.Now
                 yield (ending - starting)
             numOfTriangles.Value <- graph.NumOfTriangles
         }
+    
+     override this.SolverName = "Persistent"
 

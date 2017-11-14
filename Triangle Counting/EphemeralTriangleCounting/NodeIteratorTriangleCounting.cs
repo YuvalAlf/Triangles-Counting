@@ -15,10 +15,15 @@ namespace EphemeralTriangleCounting
             var starting = DateTime.Now;
             var graph = EphemeralGraph.Empty;
             foreach (var edge in nodes)
+            {
                 graph.AddEdge(edge);
+                graph.AddEdge(edge.Inverse());
+            }
             numOfTriangles.Value = graph.NumOfTrianglesNodeIterator();
             var ending = DateTime.Now;
             yield return ending - starting;
         }
+
+        public override string SolverName => "Node Iterator";
     }
 }

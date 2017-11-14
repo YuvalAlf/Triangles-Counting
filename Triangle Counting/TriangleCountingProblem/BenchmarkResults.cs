@@ -16,5 +16,10 @@ namespace TriangleCountingProblem
             AverageMsTimePerOperation = averageMsTimePerOperation;
             TimeStdDev = timeStdDev;
         }
+
+        public override string ToString()
+        {
+            return $"Result: {Result}, Overall Time: {OverallTime.TotalSeconds}sec, Average time per operation: {AverageMsTimePerOperation.TotalMilliseconds}ms, Standard deviation: {TimeStdDev.TotalMilliseconds}ms";
+        }
     }
 }
